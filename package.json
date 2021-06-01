@@ -1,0 +1,16 @@
+{
+  "name": "todo-mern",
+  "version": "0.1.0",
+  "description": "ToDo MERN App",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/max-severin/todo-mern.git"
+  },
+  "author": "Max Severin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/max-severin/todo-mern/issues"
+  },
+  "homepage": "https://github.com/max-severin/todo-mern#readme",
+  "dependencies": {}
+}
