@@ -16,6 +16,21 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  try {
+    const task = await TaskModel.findById(req.params.id);
+
+    res.json(task);
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      error,
+      message: 'Server Error',
+    });
+  }
+});
+
 router.post('/', async (req, res) => {
   try {
     const { title, description } = req.body;
