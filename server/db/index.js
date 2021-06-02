@@ -16,4 +16,9 @@ const MONGO_URI = process.env.MONGO_URI;
   }
 })();
 
-module.exports = mongoose.connection;
+const dbConnection = mongoose.connection;
+
+dbConnection.on('error', console.error.bind(console, 'MongoDB connection error:'));
+dbConnection.once('open', () => console.log('MongoDB database connection established successfully'));
+
+module.exports = dbConnection;
