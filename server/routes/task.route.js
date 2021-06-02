@@ -18,9 +18,11 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
+    const { title, description } = req.body;
+
     const newTask = new TaskModel({
-      title: req.body.title,
-      description: req.body.description,
+      title,
+      description,
     });
 
     await newTask.save();
@@ -29,6 +31,36 @@ router.post('/', async (req, res) => {
       title: newTask.title,
       description: newTask.description,
     });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      error,
+      message: 'Server Error',
+    });
+  }
+});
+
+router.put('/:id', async (req, res) => {
+  try {
+    const { title, description } = req.body;
+
+    const existedTask = await TaskModel.findOneAndUpdate(
+      { _id: req.params.id },
+      { title, description },
+      { new: true },
+    );
+
+    if (existedTask) {
+      res.json({
+        title: existedTask.title,
+        description: existedTask.description,
+      });
+    } else {
+      res.status(404).json({
+        message: 'User id is not found',
+      });
+    }
   } catch (error) {
     console.error(error);
 
