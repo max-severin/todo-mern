@@ -73,7 +73,31 @@ router.put('/:id', async (req, res) => {
       });
     } else {
       res.status(404).json({
-        message: 'User id is not found',
+        message: 'Task id is not found',
+      });
+    }
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      error,
+      message: 'Server Error',
+    });
+  }
+});
+
+router.delete('/:id', async (req, res) => {
+  try {
+    const deletedTask = await TaskModel.findByIdAndDelete(req.params.id);
+
+    if (deletedTask) {
+      res.json({
+        title: deletedTask.title,
+        description: deletedTask.description,
+      });
+    } else {
+      res.status(404).json({
+        message: 'Task id is not found',
       });
     }
   } catch (error) {
