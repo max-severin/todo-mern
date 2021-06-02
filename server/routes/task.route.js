@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const taskModel = require('../models/task.model');
+const TaskModel = require('../models/task.model');
 
 router.get('/', (req, res) => {
   res.json({
@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const newTask = new taskModel({
+    const newTask = new TaskModel({
       title: req.body.title,
       description: req.body.description,
     });
@@ -17,7 +17,6 @@ router.post('/', async (req, res) => {
     await newTask.save();
 
     res.json({
-      _id: newTask._id,
       title: newTask.title,
       description: newTask.description,
     });
