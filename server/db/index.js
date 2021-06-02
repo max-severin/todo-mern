@@ -1,17 +1,18 @@
 const mongoose = require('mongoose');
-const MONGO_URI = process.env.MONGO_URI;
+
+const { MONGO_URI } = process.env;
 
 (async () => {
   try {
     await mongoose.connect(
-      MONGO_URI, 
-      { 
-        useNewUrlParser: true, 
+      MONGO_URI,
+      {
+        useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
-      }
+      },
     );
-  } catch(error) {
+  } catch (error) {
     console.error(error);
   }
 })();

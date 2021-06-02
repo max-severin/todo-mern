@@ -3,12 +3,12 @@ const taskModel = require('../models/task.model');
 
 router.get('/', (req, res) => {
   res.json({
-    type: 'READ'
+    type: 'READ',
   });
 });
 
 router.post('/', async (req, res) => {
-  try {    
+  try {
     const newTask = new taskModel({
       title: req.body.title,
       description: req.body.description,
@@ -21,12 +21,12 @@ router.post('/', async (req, res) => {
       title: newTask.title,
       description: newTask.description,
     });
-  } catch(error) {
+  } catch (error) {
     console.error(error);
 
     res.status(500).json({
       error,
-      message: 'Server Error'
+      message: 'Server Error',
     });
   }
 });
