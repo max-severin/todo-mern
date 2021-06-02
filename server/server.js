@@ -4,13 +4,10 @@ const bodyParser = require('body-parser');
 
 require('dotenv').config();
 
-const DB = require('./db');
-DB.on('error', console.error.bind(console, 'MongoDB connection error:'));
-DB.once('open', () => console.log('MongoDB database connection established successfully'));
-
-const taskModel = require('./models/task');
-
 const app = express();
+const db = require('./db');
+const taskModel = require('./models/task.model');
+
 
 const PORT = process.env.PORT || 5000;
 
