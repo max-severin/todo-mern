@@ -1,4 +1,5 @@
 import './App.css';
+import TaskForm from './components/TaskForm';
 
 function App() {
   return (
@@ -8,6 +9,9 @@ function App() {
           ToDo MERN App
         </p>
       </header>
+      <main>
+        <TaskForm createTask={alert} />
+      </main>
     </div>
   );
 }

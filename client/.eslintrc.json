@@ -23,6 +23,7 @@
       // "react/jsx-one-expression-per-line": "off",
       "comma-dangle": "off",
       // "object-curly-newline": "off",
-      "no-unused-vars": "off"
+      "no-unused-vars": "off",
+      "no-console": "off"
     }
 }
