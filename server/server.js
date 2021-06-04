@@ -12,7 +12,14 @@ const taskRoutes = require('./routes/task.route');
 
 app.use(cors());
 
+app.use(express.json());
+
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use((req, res, next) => {
+  res.header('Content-Type', 'application/json; charset=UTF-8');
+  next();
+});
 
 app.use('/api/tasks', taskRoutes);
 
