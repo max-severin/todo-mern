@@ -12,9 +12,19 @@ function App() {
 
   const getTasks = async () => {
     try {
-      const asyncRes = await axios(`${API_URL}/tasks`);
+      const asyncRes = await axios.get(`${API_URL}/tasks`);
 
       setTasks(asyncRes.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const createTask = async (newTask) => {
+    try {
+      const asyncRes = await axios.post(`${API_URL}/tasks`, newTask);
+
+      setTasks(asyncRes.data.tasks);
     } catch (error) {
       console.error(error);
     }
@@ -32,7 +42,15 @@ function App() {
         </p>
       </header>
       <main>
-        <TaskForm createTask={alert} />
+        <TaskForm createTask={({ title, description }) => {
+          const newTitle = title.trim();
+          const newDescription = description.trim();
+
+          if (newTitle.length > 0) {
+            createTask({ title: newTitle, description: newDescription });
+          }
+        }}
+        />
         <TaskList tasks={tasks} updateTask={alert} deleteTask={alert} />
       </main>
     </div>
