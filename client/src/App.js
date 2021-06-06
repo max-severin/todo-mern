@@ -9,12 +9,14 @@ const API_URL = process.env.REACT_APP_API_URL;
 function App() {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState('');
 
   const getTasks = async () => {
     try {
       const asyncRes = await axios.get(`${API_URL}/tasks`);
-      setTasks(asyncRes.data);
+
       setLoading(false);
+      setTasks(asyncRes.data);
     } catch (error) {
       console.error(error);
     }
@@ -23,8 +25,12 @@ function App() {
   const createTask = async (newTask) => {
     try {
       const asyncRes = await axios.post(`${API_URL}/tasks`, newTask);
-      setTasks(asyncRes.data.tasks);
+
       setLoading(false);
+      setTasks(asyncRes.data.tasks);
+      setMessage(asyncRes.data.message);
+
+      setTimeout(setMessage, 500, '');
     } catch (error) {
       console.error(error);
     }
@@ -33,8 +39,12 @@ function App() {
   const deleteTask = async (taskId) => {
     try {
       const asyncRes = await axios.delete(`${API_URL}/tasks/${taskId}`);
-      setTasks(asyncRes.data.tasks);
+
       setLoading(false);
+      setTasks(asyncRes.data.tasks);
+      setMessage(asyncRes.data.message);
+
+      setTimeout(setMessage, 500, '');
     } catch (error) {
       console.error(error);
     }
@@ -64,6 +74,8 @@ function App() {
         />
 
         {loading && <span>Loading...</span>}
+
+        {message && <span>{message}</span>}
 
         {tasks && (
           <TaskList
