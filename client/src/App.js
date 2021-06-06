@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import './App.css';
+import TaskController from './components/TaskController';
 import TaskForm from './components/TaskForm';
 import TaskList from './components/TaskList';
-import TaskController from './components/TaskController';
 
 function App() {
   const {
@@ -23,9 +23,9 @@ function App() {
       <main>
         <TaskForm createTask={createTask} />
 
-        {loading && <span>Loading...</span>}
+        {loading && <p>Loading...</p>}
 
-        {message && <span>{message}</span>}
+        {message && <p>{message}</p>}
 
         {tasks && (
           <TaskList

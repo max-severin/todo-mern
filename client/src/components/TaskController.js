@@ -1,65 +1,67 @@
-import axios from 'axios';
 import { useState } from 'react';
+import { getTasks, createTask, deleteTask } from './TaskAPI';
 
-const API_URL = process.env.REACT_APP_API_URL;
-
-const useTaskState = (initialTasks) => {
+const TaskController = (initialTasks) => {
   const [tasks, setTasks] = useState(initialTasks);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState('');
+
+  const MESSAGE_TIMEOUT = 500;
 
   return {
     tasks,
     loading,
     message,
-    getTasks: async () => {
-      try {
-        const asyncRes = await axios.get(`${API_URL}/tasks`);
-
-        setLoading(false);
-        setTasks(asyncRes.data);
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    createTask: async ({ title, description }) => {
-      try {
-        const newTitle = title.trim();
-        const newDescription = description.trim();
-
-        if (newTitle.length > 0) {
-          setLoading(true);
-
-          const asyncRes = await axios.post(`${API_URL}/tasks`, { title: newTitle, description: newDescription });
-
+    getTasks: () => {
+      getTasks()
+        .then((responseTasks) => {
           setLoading(false);
-          setTasks(asyncRes.data.tasks);
-          setMessage(asyncRes.data.message);
+          setTasks(responseTasks);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    createTask: ({ title, description }) => {
+      const newTitle = title.trim();
+      const newDescription = description.trim();
 
-          setTimeout(setMessage, 500, '');
-        }
-      } catch (error) {
-        console.error(error);
+      if (newTitle.length > 0) {
+        setLoading(true);
+
+        createTask({
+          title: newTitle, description: newDescription
+        })
+          .then(({ tasks: responseTasks, message: responseMessage }) => {
+            setLoading(false);
+            setTasks(responseTasks);
+            setMessage(responseMessage);
+
+            setTimeout(setMessage, MESSAGE_TIMEOUT, '');
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       }
     },
     deleteTask: async (taskId) => {
-      try {
-        if (taskId.length > 0) {
-          setLoading(true);
+      if (taskId.length > 0) {
+        setLoading(true);
 
-          const asyncRes = await axios.delete(`${API_URL}/tasks/${taskId}`);
+        deleteTask(taskId)
+          .then(({ tasks: responseTasks, message: responseMessage }) => {
+            setLoading(false);
+            setTasks(responseTasks);
+            setMessage(responseMessage);
 
-          setLoading(false);
-          setTasks(asyncRes.data.tasks);
-          setMessage(asyncRes.data.message);
-
-          setTimeout(setMessage, 500, '');
-        }
-      } catch (error) {
-        console.error(error);
+            setTimeout(setMessage, MESSAGE_TIMEOUT, '');
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       }
     },
   };
 };
 
-export default useTaskState;
+export default TaskController;
