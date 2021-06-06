@@ -30,6 +30,16 @@ function App() {
     }
   };
 
+  const deleteTask = async (taskId) => {
+    try {
+      const asyncRes = await axios.delete(`${API_URL}/tasks/${taskId}`);
+
+      setTasks(asyncRes.data.tasks);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     getTasks();
   }, []);
@@ -51,7 +61,15 @@ function App() {
           }
         }}
         />
-        <TaskList tasks={tasks} updateTask={alert} deleteTask={alert} />
+        <TaskList
+          tasks={tasks}
+          updateTask={alert}
+          deleteTask={(taskId) => {
+            if (taskId.length > 0) {
+              deleteTask(taskId);
+            }
+          }}
+        />
       </main>
     </div>
   );
