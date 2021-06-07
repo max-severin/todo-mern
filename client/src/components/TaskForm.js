@@ -8,7 +8,11 @@ const TaskForm = ({ createTask }) => {
   return (
     <form onSubmit={(event) => {
       event.preventDefault();
+
       createTask({ title, description });
+
+      setTitle('');
+      setDescription('');
     }}
     >
       <input type="text" name="title" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
