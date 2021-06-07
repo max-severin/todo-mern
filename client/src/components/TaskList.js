@@ -1,29 +1,23 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const TaskList = ({ tasks, updateTask, deleteTask }) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-
-  return (
-    <ul>
-      {tasks.map((task) => (
-        <li key={task._id}>
-          <h3>{task.title}</h3>
-          <p>{task.description}</p>
-          <input
-            type="button"
-            value="Delete"
-            onClick={(event) => {
-              deleteTask(task._id);
-            }}
-          />
-        </li>
-      ))}
-    </ul>
-  );
-};
-
+const TaskList = ({ tasks, updateTask, deleteTask }) => (
+  <ul>
+    {tasks.map((task) => (
+      <li key={task._id}>
+        <h3>{task.title}</h3>
+        <p>{task.description}</p>
+        <input
+          type="button"
+          value="Delete"
+          onClick={(event) => {
+            deleteTask(task._id);
+          }}
+        />
+      </li>
+    ))}
+  </ul>
+);
 TaskList.propTypes = {
   tasks: PropTypes.arrayOf(
     PropTypes.shape({
