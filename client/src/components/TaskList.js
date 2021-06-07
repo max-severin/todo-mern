@@ -18,6 +18,7 @@ const TaskList = ({ tasks, updateTask, deleteTask }) => (
     ))}
   </ul>
 );
+
 TaskList.propTypes = {
   tasks: PropTypes.arrayOf(
     PropTypes.shape({

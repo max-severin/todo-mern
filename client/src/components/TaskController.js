@@ -6,7 +6,8 @@ const TaskController = (initialTasks) => {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState('');
 
-  const MESSAGE_TIMEOUT = 500;
+  const LOADING_DELAY = 900;
+  const MESSAGE_TIMEOUT = 2500;
 
   return {
     tasks,
@@ -15,7 +16,7 @@ const TaskController = (initialTasks) => {
     getTasks: () => {
       getTasks()
         .then((responseTasks) => {
-          setLoading(false);
+          setTimeout(setLoading, LOADING_DELAY, false);
           setTasks(responseTasks);
         })
         .catch((error) => {
@@ -33,7 +34,7 @@ const TaskController = (initialTasks) => {
           title: newTitle, description: newDescription
         })
           .then(({ tasks: responseTasks, message: responseMessage }) => {
-            setLoading(false);
+            setTimeout(setLoading, LOADING_DELAY, false);
             setTasks(responseTasks);
             setMessage(responseMessage);
 
@@ -50,7 +51,7 @@ const TaskController = (initialTasks) => {
 
         deleteTask(taskId)
           .then(({ tasks: responseTasks, message: responseMessage }) => {
-            setLoading(false);
+            setTimeout(setLoading, LOADING_DELAY, false);
             setTasks(responseTasks);
             setMessage(responseMessage);
 

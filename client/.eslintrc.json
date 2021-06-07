@@ -23,6 +23,7 @@
       "comma-dangle": "off",
       "no-unused-vars": "off",
       "no-underscore-dangle": "off",
-      "no-console": "off"
+      "no-console": "off",
+      "react/no-array-index-key" : "off"
     }
 }

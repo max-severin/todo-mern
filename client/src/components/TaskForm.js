@@ -25,7 +25,7 @@ const TaskForm = ({ createTask }) => {
 };
 
 TaskForm.propTypes = {
-  createTask: PropTypes.func.isRequired
+  createTask: PropTypes.func.isRequired,
 };
 
 export default TaskForm;
