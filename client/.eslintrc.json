@@ -20,10 +20,9 @@
     "rules": {
       "react/jsx-filename-extension": "off",
       "react/react-in-jsx-scope": "off",
-      // "react/jsx-one-expression-per-line": "off",
       "comma-dangle": "off",
-      // "object-curly-newline": "off",
       "no-unused-vars": "off",
+      "no-underscore-dangle": "off",
       "no-console": "off"
     }
 }
