@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 const TaskList = ({ tasks, updateTask, deleteTask }) => (
