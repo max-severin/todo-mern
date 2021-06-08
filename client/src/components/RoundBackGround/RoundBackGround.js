@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import './RoundBackGround.scss';
 
 const randomNumber = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 

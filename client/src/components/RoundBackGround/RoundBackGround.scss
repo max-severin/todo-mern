@@ -1,0 +1,41 @@
+@import "../../sass/_variables.scss";
+
+.round-background-container {
+  height: 90vh;
+  width: 100%;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+
+  span.message {
+    top: calc(50%);
+    background-color: $ligth-gray-color;
+    color: $white-color;
+  }
+
+  .round-background-item {
+    display: block;
+    position: absolute;
+    content: '';
+    border-radius: 50%;
+  }
+
+  .round-background-item--violet {
+    background-color: $electric-violet-color;
+  }
+  .round-background-item--light-violet {
+    background-color: lighten($electric-violet-color, 25%);
+  }
+  .round-background-item--dark-violet {
+    background-color: darken($electric-violet-color, 25%);
+  }
+  .round-background-item--dodgerblue {
+    background-color: $dodger-blue-color;
+  }
+  .round-background-item--light-dodgerblue {
+    background-color: lighten($dodger-blue-color, 25%);
+  }
+  .round-background-item--dark-dodgerblue {
+    background-color: darken($dodger-blue-color, 25%);
+  }
+}
