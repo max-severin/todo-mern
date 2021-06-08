@@ -1,0 +1,89 @@
+@import "./_mixins.scss";
+@import "./_variables.scss";
+
+@include keyframes(animateTranslatePositive) {
+  0% {
+    @include transform(translateY(0px));
+  }
+  25% {
+    @include transform(translateY(1px));
+  }
+  50% {
+    @include transform(translateY(4px));
+  }
+  75% {
+    @include transform(translateY(1px));
+  }
+  100% {
+    @include transform(translateY(0px));
+  }
+}
+
+@include keyframes(animateTranslateNegative) {
+  0% {
+    @include transform(translateY(0px));
+  }
+  25% {
+    @include transform(translateY(-1px));
+  }
+  50% {
+    @include transform(translateY(-4px));
+  }
+  75% {
+    @include transform(translateY(-1px));
+  }
+  100% {
+    @include transform(translateY(0px));
+  }
+}
+
+@include keyframes(animateRotate) {
+  from {
+    @include transform(rotate(0deg));
+  }
+  to {
+    @include transform(rotate(360deg));
+  }
+}
+
+@include keyframes(animateScale) {
+  0% { 
+    @include transform(scale(0.5)); 
+  } 
+  25% { 
+    @include transform(scale(0.75));
+  } 
+  50% { 
+    @include transform(scale(1));
+  } 
+  75% { 
+    @include transform(scale(0.75));
+  } 
+  100% { 
+    @include transform(scale(0.5));
+  } 
+}
+
+@include keyframes(animateColorFromVioletToBlue) {
+  0% { 
+    background-color: $electric-violet-color; 
+  } 
+  50% { 
+    background-color: $baby-blue-color; 
+  } 
+  100% { 
+    background-color: $electric-violet-color; 
+  } 
+}
+
+@include keyframes(animateColorFromBlueToViolet) {
+  0% { 
+    background-color: $baby-blue-color; 
+  } 
+  50% { 
+    background-color: $electric-violet-color; 
+  } 
+  100% { 
+    background-color: $baby-blue-color; 
+  } 
+}
