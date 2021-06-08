@@ -1,8 +1,12 @@
 import { useEffect } from 'react';
-import './App.css';
-import TaskController from './components/TaskController';
-import TaskForm from './components/TaskForm';
-import TaskList from './components/TaskList';
+import './App.scss';
+import RoundBackGround from './components/RoundBackGround/RoundBackGround';
+import LoadingContainer from './components/Loading/LoadingContainer';
+import Message from './components/Message/Message';
+import TaskController from './components/Task/TaskController';
+import TaskForm from './components/Task/TaskForm';
+import TaskList from './components/Task/TaskList';
+import TaskEmpty from './components/Task/TaskEmpty';
 
 function App() {
   const {
@@ -21,20 +25,28 @@ function App() {
         </p>
       </header>
       <main>
+        <RoundBackGround
+          totalRoundItems={3}
+        />
+
         <TaskForm createTask={createTask} />
 
-        {loading && <p>Loading...</p>}
-
-        {message && <p>{message}</p>}
-
-        {tasks && (
-          <TaskList
-            tasks={tasks}
-            updateTask={alert}
-            deleteTask={deleteTask}
-          />
-        )}
+        {tasks.length > 0
+          ? (
+            <TaskList
+              tasks={tasks}
+              updateTask={alert}
+              deleteTask={deleteTask}
+            />
+          )
+          : (
+            <TaskEmpty />
+          )}
       </main>
+
+      {loading && <LoadingContainer totalLoadingItems={5} />}
+
+      {message && <Message message={message} additionalClassName="api-message" />}
     </div>
   );
 }
