@@ -1,0 +1,29 @@
+@import "../../sass/_variables.scss";
+
+.task-create-form {
+  width: 80vw;
+  margin: 1em auto;
+  padding: 15px;
+  box-shadow: 3px 3px 5px $dark-gray-color;
+
+  input,
+  textarea {
+    width: 100%;
+    margin: 1px auto;
+    padding: 10px 5px;
+    box-sizing: border-box;
+    border: 1px solid $ligth-gray-color;
+  }
+
+  input[type=submit] {
+    background-color: $dodger-blue-color;
+    color: $white-color;
+    text-transform: uppercase;
+    padding: 15px 5px;
+  }
+
+  input:focus,
+  textarea:focus {
+    border-color: $dodger-blue-color;
+  }
+}
