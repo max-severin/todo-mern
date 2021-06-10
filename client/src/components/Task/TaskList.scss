@@ -1,0 +1,25 @@
+@import "../../sass/_variables.scss";
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  .task-list--item {
+    position: relative;
+    width: 80vw;
+    margin: 1em auto;
+    padding: 0.5em 1em 1em 0.5em;
+    box-sizing: border-box;
+    border-radius: 10px 0 50px 0;
+    box-shadow: 3px 3px 5px $dark-gray-color;
+    background-color: $baby-blue-color;
+    text-align: left;
+  
+    .task-list--delete-button {
+      position: absolute;
+      top: 1em;
+      right: 1em;
+    }
+  }  
+}

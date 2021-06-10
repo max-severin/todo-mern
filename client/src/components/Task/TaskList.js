@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types';
+import './TaskList.scss';
 
 const TaskList = ({ tasks, updateTask, deleteTask }) => (
-  <ul>
+  <ul className="task-list">
     {tasks.map((task) => (
-      <li key={task._id}>
+      <li key={task._id} className="task-list--item">
         <h3>{task.title}</h3>
         <p>{task.description}</p>
+        <p>{task.createdAt}</p>
         <input
+          className="task-list--delete-button"
           type="button"
           value="Delete"
           onClick={(event) => {
