@@ -1,12 +1,12 @@
 @import "../../sass/_variables.scss";
 
-.tasks-empty-container {
-  height: 90vh;
+.empty-tasks {
+  height: 85vh;
   width: 100%;
 
-  span.message {
+  .empty-tasks--message {
     top: calc(50%);
-    background-color: $ligth-gray-color;
-    color: $white-color;
+    background-color: lighten($baby-blue-color, 15%);
+    color: $dark-gray-color;
   }
 }
