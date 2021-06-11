@@ -6,7 +6,7 @@ const Header = () => {
 
   return (
     <header className="todo-app-header">
-      <div className="todo-app-header--wrapper">
+      <div className="content-wrapper-container">
         <div className="todo-app-header--date">
           <Moment format="Do MMMM">{now}</Moment>
           ,

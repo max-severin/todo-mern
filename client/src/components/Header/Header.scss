@@ -16,17 +16,13 @@
 
   @include animation(gradient 33s ease infinite);
 
-  .todo-app-header--wrapper {
+  .content-wrapper-container {
     margin: 0 auto;
     height: 100%;
     display: flex;
     flex-direction: row;
     align-items: flex-end;
     justify-content: space-between;
-
-    @include tablet {
-      max-width: $container-width;
-    }
 
     .todo-app-header--date,
     .todo-app-header--logo {
