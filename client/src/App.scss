@@ -1,23 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+
 @import "./sass/_variables.scss";
+@import "./sass/_mixins.scss";
 
 .todo-app {
   text-align: center;
   color: $dark-gray-color;
-}
 
-.todo-app-header {
-  background-color: $dark-gray-color;
-  color: $white-color;
-  min-height: 10vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-}
+  * {
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.05em;
+  }
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  .content-wrapper-container {
+    margin: 0 auto;
+
+    @include tablet {
+      max-width: $tablet-container-width;
+    }
+    
+    @include desktop {
+      max-width: $desktop-container-width;
+    }
+  }
+
+  .todo-app-content {
+    position: relative;
+    padding-top: 15vh;
+  }
+
+  .add-task-button {
+    position: fixed;
+    right: 2.5vh;
+    bottom: 2.5vh;
+    padding: 15px 25px;
+    cursor: pointer;
+    border: 0 none;
+    text-transform: uppercase;
+    background-color: $electric-violet-color;
+    color: $white-color;
+    @include box-shadow(2px, 2px, 1px, $light-gray-color);
+    transition: all 0.1s ease-in-out;
+  }
+
+  .add-task-button:hover {
+    background-color: lighten($electric-violet-color, 25%);
+    color: $dark-gray-color;
+    @include box-shadow(2px, 2px, 1px, $dark-gray-color);
+  }
 }

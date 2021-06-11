@@ -1,25 +1,77 @@
+@import "../../sass/_mixins.scss";
 @import "../../sass/_variables.scss";
 
 .task-list {
   list-style: none;
-  padding: 0;
+  padding: 0 25px;
   margin: 0;
 
   .task-list--item {
     position: relative;
-    width: 80vw;
     margin: 1em auto;
-    padding: 0.5em 1em 1em 0.5em;
+    padding: 0.1em 1em 0.5em 0.5em;
     box-sizing: border-box;
-    border-radius: 10px 0 50px 0;
+    @include border-radius(5px 25px 5px 25px);
     box-shadow: 3px 3px 5px $dark-gray-color;
     background-color: $baby-blue-color;
     text-align: left;
-  
-    .task-list--delete-button {
-      position: absolute;
-      top: 1em;
-      right: 1em;
+
+    .task-list--item-header {
+      display: flex;
+      padding: 10px 0;
+      justify-content: space-between;
+      align-content: center;
+
+      .task-list--item-actions {
+        //
+
+        input {
+          top: 1em;
+          right: 1em;
+          padding: 5px 15px;
+          margin: 0 15px 0 0;
+          cursor: pointer;
+          border: 0 none;
+        }
+
+        .task-list--done-button {
+          background-color: $dodger-blue-color;
+          color: $white-color;
+        }
+
+        .task-list--delete-button {
+          background-color: $light-gray-color;
+          color: $white-color;
+        }
+      }
+
+      .task-list--item-created-at {
+        font-style: italic;
+      }
     }
+
+    .task-list--item-title,
+    .task-list--item-description, 
+    .task-list--item-title input,
+    .task-list--item-description textarea {
+      width: 100%;
+    }
+
+    .task-list--item-title input,
+    .task-list--item-description textarea {
+      border: 1px solid $baby-blue-color;
+      background-color: lighten($baby-blue-color, 3%);
+      margin: 5px 0;
+    }
+
+    .task-list--item-title input {
+      font-size: 1.1em;
+    }
+    
+    .task-list--item-title input:focus,
+    .task-list--item-description textarea:focus {
+      outline: none;
+      border: 1px solid $dodger-blue-color;
+    }  
   }  
 }

@@ -22,9 +22,19 @@ export const createTask = async ({ title, description }) => {
   }
 };
 
-export const deleteTask = async (taskId) => {
+export const updateTask = async (_id, taskData) => {
   try {
-    const apiResponse = await axios.delete(`${API_URL}/tasks/${taskId}`);
+    const apiResponse = await axios.put(`${API_URL}/tasks/${_id}`, taskData);
+
+    return apiResponse.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const deleteTask = async (_id) => {
+  try {
+    const apiResponse = await axios.delete(`${API_URL}/tasks/${_id}`);
 
     return apiResponse.data;
   } catch (error) {
