@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+@import "../../sass/_variables.scss";
+@import "../../sass/_animations.scss";
+
+.todo-app-header {
+  background: linear-gradient(-45deg, $baby-blue-color, $electric-violet-color, $dodger-blue-color, $dark-gray-color);
+  background-size: 200% 200%;
+  text-shadow: 1px 1px 3px $dark-gray-color;
+  color: $white-color;
+  height: 15vh;
+  width: 100%;
+  position: fixed;
+  font-size: calc(10px + 2vmin);
+  z-index: 1;
+
+  @include animation(gradient 33s ease infinite);
+
+  .todo-app-header--wrapper {
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    @include tablet {
+      max-width: $container-width;
+    }
+
+    .todo-app-header--date,
+    .todo-app-header--logo {
+      margin: 20px;
+    }
+  
+    .todo-app-header--date * {
+      font-style: italic;
+    }
+  
+    .todo-app-header--logo {
+      align-self: flex-start;
+    }
+  
+    .todo-app-header--logo,  
+    .todo-app-header--logo strong {
+      font-size: 1.4em;
+      font-family: 'Permanent Marker', cursive;
+    }
+  
+    .text-big {
+      font-size: 1.2em;
+      font-weight: normal;
+    }
+  }
+
+}
