@@ -1,16 +1,25 @@
+@import "../../sass/_mixins.scss";
 @import "../../sass/_variables.scss";
 
 .message {
   width: 50vw;
   left: calc(50% - 25vw);
-  position: absolute;
-  padding: 1em 2em 1em 1em;
+  position: fixed;
+  padding: 1em 1.5em 1em 1em;
   box-sizing: border-box;
-  border-radius: 10px 0 50px 0;
-  box-shadow: 3px 3px 5px $dark-gray-color;
+  transition: all 0.25s ease-in-out;
+  @include border-radius(5px 25px 5px 25px);
+  @include box-shadow(2px, 2px, 1px, $light-gray-color);
 }
 
 .api-message {
-  bottom: 2.5vh;
   background-color: $baby-blue-color;
+}
+
+.api-message.message-hidden {
+  bottom: -2.5vh;
+}
+
+.api-message.message-visible {
+  bottom: 2.5vh;
 }

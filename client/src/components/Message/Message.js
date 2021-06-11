@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import './Message.scss';
 
 const Message = ({ message, additionalClassName }) => (
-  <span className={`message ${additionalClassName}`}>{message}</span>
+  <span className={`message ${additionalClassName} ${message ? 'message-visible' : 'message-hidden'}`}>{message}</span>
 );
 
 Message.propTypes = {
