@@ -57,10 +57,19 @@ const postTask = async (req, res) => {
 const putTask = async (req, res) => {
   try {
     const { title, description } = req.body;
+    const updatedTaskData = { };
+
+    if (typeof title !== 'undefined') {
+      updatedTaskData.title = title;
+    }
+
+    if (typeof description !== 'undefined') {
+      updatedTaskData.description = description;
+    }
 
     const existedTask = await TaskModel.findOneAndUpdate(
       { _id: req.params.id },
-      { title, description },
+      updatedTaskData,
       { new: true },
     );
 
