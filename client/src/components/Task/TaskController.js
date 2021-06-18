@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { debounce } from 'lodash';
 import {
-  getTasks, createTask, updateTask, deleteTask
+  getTasks, createTask, updateTask, doneTask, deleteTask
 } from './TaskAPI';
 
 const TaskController = (initialTasks) => {
@@ -126,6 +126,24 @@ const TaskController = (initialTasks) => {
         if (typeof description !== 'undefined') {
           debouncedDescriptionUpdate(_id, { _id, description });
         }
+      }
+    },
+    doneTask: async (_id, done) => {
+      if (_id.length > 0) {
+        setLoading(true);
+        setMessage('');
+
+        doneTask(_id, !done)
+          .then(({ tasks: responseTasks, message: responseMessage }) => {
+            setTimeout(setLoading, LOADING_DELAY, false);
+            setTasks(responseTasks);
+            setMessage(responseMessage);
+
+            setTimeout(setMessage, MESSAGE_TIMEOUT, '');
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       }
     },
     deleteTask: async (_id) => {

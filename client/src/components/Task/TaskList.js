@@ -2,19 +2,21 @@ import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import './TaskList.scss';
 
-const TaskList = ({ tasks, updateTask, deleteTask }) => (
+const TaskList = ({
+  tasks, updateTask, doneTask, deleteTask
+}) => (
   <div className="content-wrapper-container">
     <ul className="task-list">
       {tasks.map((task) => (
-        <li key={task._id} className="task-list--item">
+        <li key={task._id} className={`task-list--item ${task.done ? 'task-done' : ''}`}>
           <div className="task-list--item-header">
             <div className="task-list--item-actions">
               <input
                 className="task-list--done-button"
                 type="button"
-                value="Done"
+                value={!task.done ? 'Done' : 'Undone'}
                 onClick={(event) => {
-                  deleteTask(task._id);
+                  doneTask(task._id, task.done);
                 }}
               />
               <input
@@ -45,6 +47,7 @@ const TaskList = ({ tasks, updateTask, deleteTask }) => (
               onChange={(event) => {
                 updateTask({ _id: task._id, title: event.target.value });
               }}
+              disabled={task.done}
             />
           </div>
 
@@ -56,6 +59,7 @@ const TaskList = ({ tasks, updateTask, deleteTask }) => (
               onChange={(event) => {
                 updateTask({ _id: task._id, description: event.target.value });
               }}
+              disabled={task.done}
             />
           </div>
         </li>
@@ -73,6 +77,7 @@ TaskList.propTypes = {
     })
   ),
   updateTask: PropTypes.func.isRequired,
+  doneTask: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired,
 };
 

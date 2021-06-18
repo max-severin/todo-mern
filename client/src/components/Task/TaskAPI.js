@@ -32,6 +32,16 @@ export const updateTask = async (_id, taskData) => {
   }
 };
 
+export const doneTask = async (_id, done) => {
+  try {
+    const apiResponse = await axios.put(`${API_URL}/tasks/${_id}`, { done });
+
+    return apiResponse.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 export const deleteTask = async (_id) => {
   try {
     const apiResponse = await axios.delete(`${API_URL}/tasks/${_id}`);

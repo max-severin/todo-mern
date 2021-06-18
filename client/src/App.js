@@ -10,7 +10,7 @@ import TaskEmpty from './components/Task/TaskEmpty';
 
 function App() {
   const {
-    tasks, emptyTasks, loading, message, getTasks, createTask, updateTask, deleteTask
+    tasks, emptyTasks, loading, message, getTasks, createTask, updateTask, doneTask, deleteTask
   } = TaskController([]);
 
   useEffect(() => {
@@ -30,6 +30,7 @@ function App() {
         <TaskList
           tasks={tasks}
           updateTask={updateTask}
+          doneTask={doneTask}
           deleteTask={deleteTask}
         />
         )}

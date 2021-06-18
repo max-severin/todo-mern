@@ -9,12 +9,13 @@
   .task-list--item {
     position: relative;
     margin: 1em auto;
-    padding: 0.1em 1em 0.5em 0.5em;
+    padding: 0.5em 1em 1em 0.5em;
     box-sizing: border-box;
     @include border-radius(5px 25px 5px 25px);
     box-shadow: 3px 3px 5px $dark-gray-color;
     background-color: $baby-blue-color;
     text-align: left;
+    transition: all 0.1s ease-in-out;
 
     .task-list--item-header {
       display: flex;
@@ -64,6 +65,10 @@
       margin: 5px 0;
     }
 
+    .task-list--item-description textarea {
+      min-height: 100px;
+    }
+
     .task-list--item-title input {
       font-size: 1.1em;
     }
@@ -73,5 +78,22 @@
       outline: none;
       border: 1px solid $dodger-blue-color;
     }  
+
+    &.task-done {
+      background-color: $light-gray-color;
+      opacity: 0.85;
+
+      .task-list--done-button,
+      .task-list--delete-button {
+        background-color: $dark-gray-color !important;
+        color: $light-gray-color !important;
+      }
+
+      .task-list--item-title input,
+      .task-list--item-description textarea {
+        border: 1px solid $dark-gray-color;
+        background-color: lighten($dark-gray-color, 3%);
+      }
+    }
   }  
 }
