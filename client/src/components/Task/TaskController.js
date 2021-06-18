@@ -75,6 +75,7 @@ const TaskController = (initialTasks) => {
     },
     createTask: () => {
       setLoading(true);
+      setMessage('');
 
       createTask({
         title: '', description: ''
@@ -130,6 +131,7 @@ const TaskController = (initialTasks) => {
     deleteTask: async (_id) => {
       if (_id.length > 0) {
         setLoading(true);
+        setMessage('');
 
         deleteTask(_id)
           .then(({ tasks: responseTasks, message: responseMessage }) => {
