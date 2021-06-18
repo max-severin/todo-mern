@@ -41,9 +41,7 @@ const postTask = async (req, res) => {
 
     await newTask.save();
 
-    const allTasks = await TaskModel.find().sort({ createdAt: -1 });
-
-    res.json({ task: newTask, tasks: allTasks, message: 'A new task is created successfully' });
+    res.json({ task: newTask, message: 'A new task is created successfully' });
   } catch (error) {
     console.error(error);
 
@@ -56,31 +54,14 @@ const postTask = async (req, res) => {
 
 const putTask = async (req, res) => {
   try {
-    const { title, description, done } = req.body;
-    const updatedTaskData = { };
-
-    if (typeof title !== 'undefined') {
-      updatedTaskData.title = title;
-    }
-
-    if (typeof description !== 'undefined') {
-      updatedTaskData.description = description;
-    }
-
-    if (typeof done !== 'undefined') {
-      updatedTaskData.done = done;
-    }
-
-    const existedTask = await TaskModel.findOneAndUpdate(
+    const updatedTask = await TaskModel.findOneAndUpdate(
       { _id: req.params.id },
-      updatedTaskData,
+      req.body,
       { new: true },
     );
 
-    if (existedTask) {
-      const allTasks = await TaskModel.find().sort({ createdAt: -1 });
-
-      res.status(200).json({ task: existedTask, tasks: allTasks, message: 'The task is updated successfully' });
+    if (updatedTask) {
+      res.status(200).json({ task: updatedTask, message: 'The task is updated successfully' });
     } else {
       res.status(404).json({
         message: 'Task ID is not found',
@@ -101,9 +82,7 @@ const deleteTask = async (req, res) => {
     const deletedTask = await TaskModel.findByIdAndDelete(req.params.id);
 
     if (deletedTask) {
-      const allTasks = await TaskModel.find().sort({ createdAt: -1 });
-
-      res.status(200).json({ task: deletedTask, tasks: allTasks, message: 'The task is deleted successfully' });
+      res.status(200).json({ task: deletedTask, message: 'The task is deleted successfully' });
     } else {
       res.status(404).json({
         message: 'Task ID is not found',

@@ -80,12 +80,14 @@ const TaskController = (initialTasks) => {
       createTask({
         title: '', description: ''
       })
-        .then(({ tasks: responseTasks, message: responseMessage }) => {
+        .then(({ task: newTask, message: responseMessage }) => {
+          const updatedTasks = [newTask, ...tasks];
+
           setTimeout(setLoading, LOADING_DELAY, false);
-          setTasks(responseTasks);
+          setTasks(updatedTasks);
           setMessage(responseMessage);
 
-          checkEmptyTasks(responseTasks);
+          checkEmptyTasks(updatedTasks);
 
           setTimeout(setMessage, MESSAGE_TIMEOUT, '');
         })
@@ -134,9 +136,9 @@ const TaskController = (initialTasks) => {
         setMessage('');
 
         doneTask(_id, !done)
-          .then(({ tasks: responseTasks, message: responseMessage }) => {
+          .then(({ task: updatedTask, message: responseMessage }) => {
             setTimeout(setLoading, LOADING_DELAY, false);
-            setTasks(responseTasks);
+            setTasks(tasks.map((task) => (task._id === updatedTask._id ? updatedTask : task)));
             setMessage(responseMessage);
 
             setTimeout(setMessage, MESSAGE_TIMEOUT, '');
@@ -152,12 +154,14 @@ const TaskController = (initialTasks) => {
         setMessage('');
 
         deleteTask(_id)
-          .then(({ tasks: responseTasks, message: responseMessage }) => {
+          .then(({ task: deletedTask, message: responseMessage }) => {
+            const updatedTasks = tasks.filter((task) => task._id !== deletedTask._id);
+
             setTimeout(setLoading, LOADING_DELAY, false);
-            setTasks(responseTasks);
+            setTasks(updatedTasks);
             setMessage(responseMessage);
 
-            checkEmptyTasks(responseTasks);
+            checkEmptyTasks(updatedTasks);
 
             setTimeout(setMessage, MESSAGE_TIMEOUT, '');
           })
