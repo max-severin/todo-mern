@@ -2,7 +2,7 @@ const TaskModel = require('../models/task.model');
 
 const getTasks = async (req, res) => {
   try {
-    const tasks = await TaskModel.find();
+    const tasks = await TaskModel.find().sort({ createdAt: -1 });
 
     res.status(200).json(tasks);
   } catch (error) {
@@ -41,7 +41,7 @@ const postTask = async (req, res) => {
 
     await newTask.save();
 
-    const allTasks = await TaskModel.find();
+    const allTasks = await TaskModel.find().sort({ createdAt: -1 });
 
     res.json({ task: newTask, tasks: allTasks, message: 'A new task is created successfully' });
   } catch (error) {
@@ -78,7 +78,7 @@ const putTask = async (req, res) => {
     );
 
     if (existedTask) {
-      const allTasks = await TaskModel.find();
+      const allTasks = await TaskModel.find().sort({ createdAt: -1 });
 
       res.status(200).json({ task: existedTask, tasks: allTasks, message: 'The task is updated successfully' });
     } else {
@@ -101,7 +101,7 @@ const deleteTask = async (req, res) => {
     const deletedTask = await TaskModel.findByIdAndDelete(req.params.id);
 
     if (deletedTask) {
-      const allTasks = await TaskModel.find();
+      const allTasks = await TaskModel.find().sort({ createdAt: -1 });
 
       res.status(200).json({ task: deletedTask, tasks: allTasks, message: 'The task is deleted successfully' });
     } else {
