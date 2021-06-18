@@ -22,7 +22,24 @@ const TaskController = (initialTasks) => {
     }
   };
 
-  const debouncedUpdate = useCallback(
+  const debouncedTitleUpdate = useCallback(
+    debounce((_id, taskData) => {
+      updateTask(_id, taskData)
+        .then(({ message: responseMessage }) => {
+          setTimeout(setLoading, LOADING_DELAY, false);
+          setMessage(responseMessage);
+
+          setTimeout(setMessage, MESSAGE_TIMEOUT, '');
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    DEBOUNCE_DELAY),
+    []
+  );
+
+  const debouncedDescriptionUpdate = useCallback(
     debounce((_id, taskData) => {
       updateTask(_id, taskData)
         .then(({ message: responseMessage }) => {
@@ -76,27 +93,17 @@ const TaskController = (initialTasks) => {
         });
     },
     updateTask: ({ _id, title, description }) => {
-      const updatedTaskData = {};
-
-      if (typeof title !== 'undefined') {
-        updatedTaskData.title = title;
-      }
-
-      if (typeof description !== 'undefined') {
-        updatedTaskData.description = description;
-      }
-
       if (typeof title !== 'undefined' || typeof description !== 'undefined') {
         const updatedTasks = tasks.map((task) => {
           if (task._id === _id) {
             const copiedTask = task;
 
             if (typeof title !== 'undefined') {
-              copiedTask.title = updatedTaskData.title;
+              copiedTask.title = title;
             }
 
             if (typeof description !== 'undefined') {
-              copiedTask.description = updatedTaskData.description;
+              copiedTask.description = description;
             }
 
             return copiedTask;
@@ -111,7 +118,13 @@ const TaskController = (initialTasks) => {
 
         checkEmptyTasks(updatedTasks);
 
-        debouncedUpdate(_id, updatedTaskData);
+        if (typeof title !== 'undefined') {
+          debouncedTitleUpdate(_id, { _id, title });
+        }
+
+        if (typeof description !== 'undefined') {
+          debouncedDescriptionUpdate(_id, { _id, description });
+        }
       }
     },
     deleteTask: async (_id) => {
